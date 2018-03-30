@@ -1,14 +1,23 @@
 # Bike-Race-Project_1
 
 // Basic Rules 
+
 Two Player game
+
 Bike race from one side to the other 
 Obstacles in the way 
+If obstacles are run into --> start from beginning 
 First bike to get to the finish line wins 
 First bike to win three races wins the game
 
+// Set up 
+Scoreboard with instructions
+Canvas next to it 
+
+
 
 // User 
+
 Moves bikes across the screen
 Has to avoid obstacles (moving potentially)
 The user moves the bikes by using the a,w,d,s keys AND left, up, right, down
@@ -17,7 +26,6 @@ Thw winner is determined by whoever crosses the line first.
 
 
 
-Wireframe
 
 
 
