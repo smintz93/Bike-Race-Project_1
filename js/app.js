@@ -16,8 +16,6 @@ const createCourse = function() {
 	ctx.lineTo(700, 200);
 	ctx.stroke();
 	ctx.closePath();
-
-
 	// Start Line 
 	ctx.beginPath();
 	ctx.strokeStyle = "green";
@@ -25,7 +23,6 @@ const createCourse = function() {
 	ctx.lineTo(35, 400);
 	ctx.stroke();
 	ctx.closePath();
-
 	// Finish Line
 	ctx.beginPath();
 	ctx.strokeStyle = "white";
@@ -37,6 +34,13 @@ const createCourse = function() {
 }
 
 createCourse();
+
+
+const game = {
+	obstacles: []
+}
+
+
 
 // AN OBJECT IS AN INSTANCE OF A CLASS
 // WHEN YOU INSTANTIATE A CLASS YOU CREATE AN OBJECT BASED ON THAT BLUEPRINT
@@ -65,23 +69,50 @@ class Obstacle {
 }
 
 
+
 // need a function that creates 4 Obsticles and draws a line every 126 X value (Top row)
 // need a function that creates 4 Obsticles and draws a line every 126 X value (bottom row)
+// 630 / 5 = 126
+// Need a loop to create lines every 126?
 
 
-const createObstacles = function() {
+
+const createObstacles = function(n) {
+	console.log("create obsticles called", n)
+	for(let i = 0; i < n; i ++) {
+
+
+		const obst = new Obstacle(6,100,40)
+
+		obst.drawLine();
+
+		game.obstacles.push(obst)
+
+
+
+
+
+
 
 	
+
+		console.log("for loop to create obstacles", i)
+
+	}
+
 }
 
-const obstacle1 = new Obstacle(126, 100, 40);
-const obstacle2 = new Obstacle(252, 100, 40);
-const obstacle3 = new Obstacle(378, 100, 40);
-const obstacle4 = new Obstacle(504, 100, 40);
-const obstacle5 = new Obstacle(126, 300, 40);
-const obstacle6 = new Obstacle(252, 300, 40);
-const obstacle7 = new Obstacle(378, 300, 40);
-const obstacle8 = new Obstacle(504, 300, 40);
+
+
+
+// const obstacle1 = new Obstacle(126, 100, 40);
+// const obstacle2 = new Obstacle(252, 100, 40);
+// const obstacle3 = new Obstacle(378, 100, 40);
+// const obstacle4 = new Obstacle(504, 100, 40);
+// const obstacle5 = new Obstacle(126, 300, 40);
+// const obstacle6 = new Obstacle(252, 300, 40);
+// const obstacle7 = new Obstacle(378, 300, 40);
+// const obstacle8 = new Obstacle(504, 300, 40);
 
 
 
