@@ -1,4 +1,9 @@
 body {
-	background-color: lightgrey;
+	background-color: white;
 }
+
+
+#my-canvas {
+	background-color: rgb(128, 128, 128);
+
 

@@ -1,6 +1,6 @@
 # Bike-Race-Project_1
 
-// Basic Rules 
+ Basic Rules 
 
 Two Player game
 
@@ -10,13 +10,13 @@ If obstacles are run into --> start from beginning
 First bike to get to the finish line wins 
 First bike to win three races wins the game
 
-// Set up 
+Set up 
 Scoreboard with instructions
 Canvas next to it 
 
 
 
-// User 
+User 
 
 Moves bikes across the screen
 Has to avoid obstacles (moving potentially)
