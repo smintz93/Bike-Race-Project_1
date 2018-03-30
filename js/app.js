@@ -8,44 +8,6 @@ const canvas = document.getElementById("my-canvas");
 
 const ctx = canvas.getContext("2d");
 
-const createCourse = function() {
-	// Middle Line 
-	ctx.beginPath();
-	ctx.strokeStyle = "yellow";
-	ctx.moveTo(0, 200);
-	ctx.lineTo(700, 200);
-	ctx.stroke();
-	ctx.closePath();
-	// Start Line 
-	ctx.beginPath();
-	ctx.strokeStyle = "green";
-	ctx.moveTo(35, 0);
-	ctx.lineTo(35, 400);
-	ctx.stroke();
-	ctx.closePath();
-	// Finish Line
-	ctx.beginPath();
-	ctx.strokeStyle = "white";
-	ctx.moveTo(655, 0);
-	ctx.lineTo(655, 400);
-	ctx.stroke();
-	ctx.closePath();
-
-}
-
-createCourse();
-
-
-const game = {
-	obstacles: []
-}
-
-
-
-// AN OBJECT IS AN INSTANCE OF A CLASS
-// WHEN YOU INSTANTIATE A CLASS YOU CREATE AN OBJECT BASED ON THAT BLUEPRINT
-// 'THIS' REFERS TO THAT PARTICULAR INSTANCE 
-
 class Obstacle {
 	constructor(x, y, length) {
 		this.x = x;
@@ -65,75 +27,77 @@ class Obstacle {
 
 	}
 	
-
 }
 
 
+const game = {
+	obstacles: [],
+	createCourse() {
+		// Middle Line 
+		ctx.beginPath();
+		ctx.strokeStyle = "yellow";
+		ctx.moveTo(0, 200);
+		ctx.lineTo(700, 200);
+		ctx.stroke();
+		ctx.closePath();
+		// Start Line 
+		ctx.beginPath();
+		ctx.strokeStyle = "green";
+		ctx.moveTo(35, 0);
+		ctx.lineTo(35, 400);
+		ctx.stroke();
+		ctx.closePath();
+		// Finish Line
+		ctx.beginPath();
+		ctx.strokeStyle = "white";
+		ctx.moveTo(655, 0);
+		ctx.lineTo(655, 400);
+		ctx.stroke();
+		ctx.closePath();
 
-// need a function that creates 4 Obsticles and draws a line every 126 X value (Top row)
-// need a function that creates 4 Obsticles and draws a line every 126 X value (bottom row)
-// 630 / 5 = 126
-// Need a loop to create lines every 126?
+	},
 
 
+	// need a function that creates 4 Obsticles and draws a line every 126 X value (Top row)
+	// need a function that creates 4 Obsticles and draws a line every 126 X value (bottom row)
+	// 630 / 5 = 126
+	// Need a loop to create lines every 126?
 
-const createObstacles = function(n) {
-	console.log("create obsticles called", n)
-	for(let i = 0; i < n; i ++) {
+	createObstacles(n) {
+		console.log("create obsticles called", n)
+		for(let i = 0; i < n; i ++) {
 
+			const obst = new Obstacle(6, 100, 40)
 
-		const obst = new Obstacle(6,100,40)
+			obst.drawLine();
 
-		obst.drawLine();
+			this.obstacles.push(obst)
 
-		game.obstacles.push(obst)
+			console.log("for loop to create obstacles", i)
 
-
-
-
-
-
-
-	
-
-		console.log("for loop to create obstacles", i)
+		}
 
 	}
 
 }
 
+game.createCourse();
+game.createObstacles(5)
 
+// AN OBJECT IS AN INSTANCE OF A CLASS
+// WHEN YOU INSTANTIATE A CLASS YOU CREATE AN OBJECT BASED ON THAT BLUEPRINT
+// 'THIS' REFERS TO THAT PARTICULAR INSTANCE 
 
 
-// const obstacle1 = new Obstacle(126, 100, 40);
-// const obstacle2 = new Obstacle(252, 100, 40);
-// const obstacle3 = new Obstacle(378, 100, 40);
-// const obstacle4 = new Obstacle(504, 100, 40);
-// const obstacle5 = new Obstacle(126, 300, 40);
-// const obstacle6 = new Obstacle(252, 300, 40);
-// const obstacle7 = new Obstacle(378, 300, 40);
-// const obstacle8 = new Obstacle(504, 300, 40);
 
 
 
 
 
-// const createObstacles = function() {
-// 		obstacle1.drawLine();
-// 		obstacle2.drawLine();
-// 		obstacle3.drawLine();
-// 		obstacle4.drawLine();
-// 		obstacle5.drawLine();
-// 		obstacle6.drawLine();
-// 		obstacle7.drawLine();
-// 		obstacle8.drawLine();
-// 	}
 
 
-// createObstacles();
 
 
-		
 
 
 
@@ -141,109 +105,6 @@ const createObstacles = function(n) {
 
 
 
-
-
-
-
-
-// Obstacles // Need 8 total. 4 on each course 
-
-// const Obstacles = function () {
-
-
-// // First Row
-// 	ctx.beginPath();
-
-// 	ctx.strokeStyle = "black"
-
-// 	ctx.moveTo(157, 100);
-// 	ctx.lineTo(157, 140);
-// 	ctx.stroke();
-
-// 	ctx.closePath();
-
-// 	ctx.beginPath();
-
-// 	ctx.strokeStyle = "black"
-
-// 	ctx.moveTo(157, 300);
-// 	ctx.lineTo(157, 340);
-// 	ctx.stroke();
-
-// 	ctx.closePath();
-
-// // Second Row 
-
-// 	ctx.beginPath();
-
-// 	ctx.strokeStyle = "black"
-
-// 	ctx.moveTo(283, 100);
-// 	ctx.lineTo(283, 140);
-// 	ctx.stroke();
-
-// 	ctx.closePath();
-
-// 	ctx.beginPath();
-
-// 	ctx.strokeStyle = "black"
-
-// 	ctx.moveTo(283, 300);
-// 	ctx.lineTo(283, 340);
-// 	ctx.stroke();
-
-// 	ctx.closePath();
-
-// // Third Row 
-
-// 	ctx.beginPath();
-
-// 	ctx.strokeStyle = "black"
-
-// 	ctx.moveTo(409, 100);
-// 	ctx.lineTo(409, 140);
-// 	ctx.stroke();
-
-// 	ctx.closePath();
-
-// 	ctx.beginPath();
-
-// 	ctx.strokeStyle = "black"
-
-// 	ctx.moveTo(409, 300);
-// 	ctx.lineTo(409, 340);
-// 	ctx.stroke();
-
-// 	ctx.closePath();
-
-// // Fourth Row 	
-
-// 	ctx.beginPath();
-
-// 	ctx.strokeStyle = "black"
-
-// 	ctx.moveTo(560, 100);
-// 	ctx.lineTo(560, 140);
-// 	ctx.stroke();
-
-// 	ctx.closePath();
-
-// 	ctx.beginPath();
-
-// 	ctx.strokeStyle = "black"
-
-// 	ctx.moveTo(560, 300);
-// 	ctx.lineTo(560, 340);
-// 	ctx.stroke();
-
-// 	ctx.closePath();
-
-
-
-
-// }
-
-// Obstacles();
 
 
 
