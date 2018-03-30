@@ -85,10 +85,14 @@ const game = {
 
 			const obst = new Obstacle(this.startLine + distance * i, 100, 40) 
 
+			const obstRow2 = new Obstacle(this.startLine + distance * i, 300, 40) 
 			obst.drawLine();
+			obstRow2.drawLine();
 
 			this.obstacles.push(obst)
 			
+			this.obstacles.push(obstRow2)
+
 			console.log(obst)
  
 		}
@@ -107,12 +111,50 @@ game.createObstacles(5)
 
 
 
+class Player {
+	constructor(x,y,r,e) {
+		this.x = x;
+		this.y = y;
+		this.r = r;
+		this.e = e;
+	
+		this.math = Math.PI * 2;
+
+	}
+
+	makeBike() {
+
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.r, this.e, this.math)
+		ctx.fillStyle = "red";
+		ctx.fill();
+		ctx.closePath();
+	}
+
+}
+
+
+const playerOne = new Player(15,100,10,0)
+
+const playerTwo = new Player(15,300,10,0)
+
+
+playerOne.makeBike();
+playerTwo.makeBike();
 
 
 
 
+// ctx.beginPath();
+// ctx.arc(15, 300, 10, 0, Math.PI * 2)
+// ctx.fillStyle = "orange";
+// ctx.fill();
+// ctx.closePath();
 
 
+
+
+// makeBike1();
 
 
 
