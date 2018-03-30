@@ -32,6 +32,9 @@ class Obstacle {
 
 const game = {
 	obstacles: [],
+	startLine: 35,
+	finishLine: 655,
+
 	createCourse() {
 		// Middle Line 
 		ctx.beginPath();
@@ -58,24 +61,38 @@ const game = {
 	},
 
 
-	// need a function that creates 4 Obsticles and draws a line every 126 X value (Top row)
-	// need a function that creates 4 Obsticles and draws a line every 126 X value (bottom row)
-	// 630 / 5 = 126
-	// Need a loop to create lines every 126?
 
 	createObstacles(n) {
 		console.log("create obsticles called", n)
-		for(let i = 0; i < n; i ++) {
 
-			const obst = new Obstacle(6, 100, 40)
+		// todraw evenly spaced lines, we need to 
+
+		// figure out how long the course is
+
+		const length = this.finishLine - this.startLine 
+
+		console.log(length)
+
+		// figure out distance between the individual lines
+			// divide by n + 1 
+
+		const distance = length / (n + 1)
+
+
+		// move across length and draw line n times 
+
+		for(let i = 1; i <= n; i++) {
+
+			const obst = new Obstacle(this.startLine + distance * i, 100, 40) 
 
 			obst.drawLine();
 
 			this.obstacles.push(obst)
-
-			console.log("for loop to create obstacles", i)
-
+			
+			console.log(obst)
+ 
 		}
+
 
 	}
 
