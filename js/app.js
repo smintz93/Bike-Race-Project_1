@@ -112,13 +112,14 @@ game.createObstacles(5)
 
 
 class Player {
-	constructor(x,y,r,e) {
+	constructor(x,y,r,e,color) {
 		this.x = x;
 		this.y = y;
 		this.r = r;
 		this.e = e;
-	
+		this.color = color;
 		this.math = Math.PI * 2;
+
 
 	}
 
@@ -126,7 +127,12 @@ class Player {
 
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.r, this.e, this.math)
-		ctx.fillStyle = "red";
+		// ctx.fillStyle = "red";
+		if (this.color === 1) {
+			ctx.fillStyle = "red"
+		} else {
+			ctx.fillStyle = "blue"
+		}
 		ctx.fill();
 		ctx.closePath();
 	}
@@ -134,9 +140,9 @@ class Player {
 }
 
 
-const playerOne = new Player(15,100,10,0)
+const playerOne = new Player(15,100,10,0,1)
 
-const playerTwo = new Player(15,300,10,0)
+const playerTwo = new Player(15,300,10,0,2)
 
 
 playerOne.makeBike();
@@ -144,17 +150,6 @@ playerTwo.makeBike();
 
 
 
-
-// ctx.beginPath();
-// ctx.arc(15, 300, 10, 0, Math.PI * 2)
-// ctx.fillStyle = "orange";
-// ctx.fill();
-// ctx.closePath();
-
-
-
-
-// makeBike1();
 
 
 
