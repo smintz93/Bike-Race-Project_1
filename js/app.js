@@ -110,6 +110,9 @@ game.createObstacles(5)
 // 'THIS' REFERS TO THAT PARTICULAR INSTANCE 
 
 
+let speed = 5;
+
+
 
 class Player {
 	constructor(x,y,r,e,color) {
@@ -119,6 +122,8 @@ class Player {
 		this.e = e;
 		this.color = color;
 		this.math = Math.PI * 2;
+		this.direction = "left"
+	
 
 
 	}
@@ -127,7 +132,6 @@ class Player {
 
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.r, this.e, this.math)
-		// ctx.fillStyle = "red";
 		if (this.color === 1) {
 			ctx.fillStyle = "red"
 		} else {
@@ -137,17 +141,139 @@ class Player {
 		ctx.closePath();
 	}
 
+	move() {
+		switch(this.direction) {
+			case "right":
+				this.x = this.x + speed
+
+			break;
+
+			case "up":
+				this.y = this.y - speed
+			break;
+
+			case "down":
+				this.y = this.y + speed
+
+			break;
+
+			case "left":
+				this.x = this.x - speed
+
+			break;
+
+		}
+
+	}
+
+
+
 }
+
+
 
 
 const playerOne = new Player(15,100,10,0,1)
 
+
 const playerTwo = new Player(15,300,10,0,2)
 
+ 
 
-playerOne.makeBike();
-playerTwo.makeBike();
 
+
+function animateCanvas() {
+	ctx.clearRect(0,0, canvas.width, canvas.height)
+	playerOne.move(); // this will just update the data that is used by draw body
+	playerOne.makeBike();
+	playerTwo.move()
+	playerTwo.makeBike();	
+
+	// this next line starts the animations/recursion
+
+	window.requestAnimationFrame(animateCanvas);	
+
+}
+
+
+
+
+
+
+
+
+document.addEventListener("keydown", function(event) {
+	const key = event.keyCode
+	console.log(key)
+
+	if(key == 39) {
+		playerOne.direction = "right"
+		console.log(playerOne.direction)
+		// hero.body.x = hero.body.x - speed
+	}
+	else if(key == 38) {
+		playerOne.direction = "up"
+		console.log(playerOne.direction)
+		// hero.body.y = hero.body.y - speed
+	}
+
+	else if(key == 37) {
+		playerOne.direction = "left"
+		console.log(playerOne.direction)
+		// hero.body.x = hero.body.x + speed 
+	}
+
+	else if(key == 40) {
+		playerOne.direction = "down"
+		console.log(playerOne.direction)
+		// hero.body.y = hero.body.y + speed
+	}
+
+
+	else if (key == 68) {
+		playerTwo.direction = "right"
+		console.log(playerOne.direction)
+		// hero.body.x = hero.body.x - speed
+	}
+	else if(key == 87) {
+		playerTwo.direction = "up"
+		console.log(playerOne.direction)
+		// hero.body.y = hero.body.y - speed
+	}
+
+	else if(key == 65) {
+		playerTwo.direction = "left"
+		console.log(playerOne.direction)
+		// hero.body.x = hero.body.x + speed 
+	}
+
+	else if(key == 83) {
+		playerTwo.direction = "down"
+		console.log(playerOne.direction)
+		// hero.body.y = hero.body.y + speed
+	}
+
+	playerOne.makeBike();
+
+	playerTwo.makeBike();
+
+	playerOne.move();	
+
+	playerTwo.move();
+
+
+
+})
+
+
+
+
+	playerOne.makeBike();
+
+	playerTwo.makeBike();
+
+	// animateCanvas();
+	
 
 
 
