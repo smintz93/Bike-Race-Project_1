@@ -98,9 +98,29 @@ const game = {
 		}
 
 
-	}
+	},
+
+
+	moveObstacles(){
+
+		// Need to find where Obstacles are currently being stored (Obstacles Array)
+
+		// Need to tell them where to move (Up and down) and where to stop
+
+		// Need to tell them how fast they are going to move.
+
+
+
+
+ 		 }
+
+
 
 }
+
+
+// game.moveObstacles();
+
 
 game.createCourse();
 game.createObstacles(5)
@@ -113,7 +133,6 @@ game.createObstacles(5)
 let speed = 5;
 
 
-
 class Player {
 	constructor(x,y,r,e,color) {
 		this.x = x;
@@ -122,9 +141,7 @@ class Player {
 		this.e = e;
 		this.color = color;
 		this.math = Math.PI * 2;
-		this.direction = "left"
-	
-
+		this.direction = "left";
 
 	}
 
@@ -140,6 +157,8 @@ class Player {
 		ctx.fill();
 		ctx.closePath();
 	}
+
+	// This is causing both players to move. 
 
 	move() {
 		switch(this.direction) {
@@ -171,35 +190,28 @@ class Player {
 }
 
 
-
-
 const playerOne = new Player(15,100,10,0,1)
 
 
 const playerTwo = new Player(15,300,10,0,2)
 
- 
+ // Need to clear the animation after its used 
 
 
 
 function animateCanvas() {
+
 	ctx.clearRect(0,0, canvas.width, canvas.height)
-	playerOne.move(); // this will just update the data that is used by draw body
+	playerOne.move(); // 
 	playerOne.makeBike();
 	playerTwo.move()
 	playerTwo.makeBike();	
 
-	// this next line starts the animations/recursion
+	
 
-	window.requestAnimationFrame(animateCanvas);	
+	// window.requestAnimationFrame(animateCanvas);	
 
 }
-
-
-
-
-
-
 
 
 document.addEventListener("keydown", function(event) {
@@ -209,71 +221,87 @@ document.addEventListener("keydown", function(event) {
 	if(key == 39) {
 		playerOne.direction = "right"
 		console.log(playerOne.direction)
-		// hero.body.x = hero.body.x - speed
+		playerOne.x = playerOne.x + speed
 	}
 	else if(key == 38) {
 		playerOne.direction = "up"
 		console.log(playerOne.direction)
-		// hero.body.y = hero.body.y - speed
+		playerOne.y = playerOne.y - speed
 	}
 
 	else if(key == 37) {
 		playerOne.direction = "left"
 		console.log(playerOne.direction)
-		// hero.body.x = hero.body.x + speed 
+		playerOne.x = playerOne.x - speed 
 	}
 
 	else if(key == 40) {
 		playerOne.direction = "down"
 		console.log(playerOne.direction)
-		// hero.body.y = hero.body.y + speed
+		playerOne.y = playerOne.y + speed
+
+
+	// This is clearing the board
+	// Hitting the down arrow is making everything go away
+
+	
 	}
 
 
-	else if (key == 68) {
-		playerTwo.direction = "right"
-		console.log(playerOne.direction)
-		// hero.body.x = hero.body.x - speed
-	}
-	else if(key == 87) {
-		playerTwo.direction = "up"
-		console.log(playerOne.direction)
-		// hero.body.y = hero.body.y - speed
-	}
+	// This is clearing the 
 
-	else if(key == 65) {
-		playerTwo.direction = "left"
-		console.log(playerOne.direction)
-		// hero.body.x = hero.body.x + speed 
-	}
+	ctx.clearRect(0, 0, canvas.width, canvas.height)
+	game.createCourse();
+	game.createObstacles(5)
 
-	else if(key == 83) {
-		playerTwo.direction = "down"
-		console.log(playerOne.direction)
-		// hero.body.y = hero.body.y + speed
-	}
+
+	// else if (key == 68) {
+	// 	playerTwo.direction = "right"
+		
+	// 	playerTwo.x = playerTwo.x + speed
+	// }
+	// else if(key == 87) {
+	// 	playerTwo.direction = "up"
+		
+	// 	playerTwo.y = playerTwo.y - speed
+	// }
+
+	// else if(key == 65) {
+	// 	playerTwo.direction = "left"
+
+	// 	playerTwo.x = playerTwo.x - speed
+	// }
+
+	// else if(key == 83) {
+	// 	playerTwo.direction = "down"
+
+	// 	playerTwo.y = playerTwo.y + speed
+	// }
 
 	playerOne.makeBike();
 
 	playerTwo.makeBike();
 
 	playerOne.move();	
-
-	playerTwo.move();
+// 
+	// playerTwo.move();
 
 
 
 })
 
-
-
+// 
 
 	playerOne.makeBike();
 
 	playerTwo.makeBike();
 
+
+	// If this is called. The ball moves around like a snake and there is no background
+	// Everything is being cleared
+
 	// animateCanvas();
-	
+
 
 
 
