@@ -63,7 +63,7 @@ const game = {
 
 
 	createObstacles(n) {
-		console.log("create obsticles called", n)
+		
 
 		// todraw evenly spaced lines, we need to 
 
@@ -71,7 +71,7 @@ const game = {
 
 		const length = this.finishLine - this.startLine 
 
-		console.log(length)
+	
 
 		// figure out distance between the individual lines
 			// divide by n + 1 
@@ -93,7 +93,7 @@ const game = {
 			
 			this.obstacles.push(obstRow2)
 
-			console.log(obst)
+			
  
 		}
 
@@ -101,13 +101,25 @@ const game = {
 	},
 
 
+
 	moveObstacles(){
 
 		// Need to find where Obstacles are currently being stored (Obstacles Array)
+			game.obstacles
+		// Need to make variable that has the y location of the obstacle as it moves?
+
 
 		// Need to tell them where to move (Up and down) and where to stop
 
-		// Need to tell them how fast they are going to move.
+			//  Need to move the Y segment up and down 
+			// Top row (obst) needs to move the entire length of the top 
+				// length / 2
+			// bottom row (obstRow2) needs to move the entire length of the bottom
+				// length / 2
+
+
+
+		// Need to tell them how fast they are going to move
 
 
 
@@ -119,11 +131,12 @@ const game = {
 }
 
 
-// game.moveObstacles();
+
 
 
 game.createCourse();
 game.createObstacles(5)
+// game.moveObstacles();
 
 // AN OBJECT IS AN INSTANCE OF A CLASS
 // WHEN YOU INSTANTIATE A CLASS YOU CREATE AN OBJECT BASED ON THAT BLUEPRINT
@@ -241,14 +254,12 @@ document.addEventListener("keydown", function(event) {
 		playerOne.y = playerOne.y + speed
 
 
-	// This is clearing the board
-	// Hitting the down arrow is making everything go away
 
 	
 	}
 
 
-	// This is clearing the 
+	
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height)
 	game.createCourse();
@@ -278,6 +289,10 @@ document.addEventListener("keydown", function(event) {
 	// 	playerTwo.y = playerTwo.y + speed
 	// }
 
+
+
+
+
 	playerOne.makeBike();
 
 	playerTwo.makeBike();
@@ -290,17 +305,11 @@ document.addEventListener("keydown", function(event) {
 
 })
 
-// 
+playerOne.makeBike();
 
-	playerOne.makeBike();
-
-	playerTwo.makeBike();
+playerTwo.makeBike();
 
 
-	// If this is called. The ball moves around like a snake and there is no background
-	// Everything is being cleared
-
-	// animateCanvas();
 
 
 

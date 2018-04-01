@@ -5,6 +5,29 @@ body {
 
 #my-canvas {
 	background-color: rgb(128, 128, 128);
+	display: inline-block;
+	margin-left: 100px;
 
+
+}
+
+
+aside {
+	height: 400px;
+	width: 250px;
+	border: 1px solid black;
+	display: inline-block;
+	margin-left: 50px;
+	background-color: grey;
+	float: left;
+
+}
+
+	
+
+h1 {
+
+	margin-top: 10px;
+	text-align: center;
 
 }
