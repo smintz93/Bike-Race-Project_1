@@ -102,34 +102,8 @@ const game = {
 
 
 
-	moveObstacles(){
-
-		// Need to find where Obstacles are currently being stored (Obstacles Array)
-			game.obstacles
-		// Need to make variable that has the y location of the obstacle as it moves?
-
-
-		// Need to tell them where to move (Up and down) and where to stop
-
-			//  Need to move the Y segment up and down 
-			// Top row (obst) needs to move the entire length of the top 
-				// length / 2
-			// bottom row (obstRow2) needs to move the entire length of the bottom
-				// length / 2
-
-
-
-		// Need to tell them how fast they are going to move
-
-
-
-
- 		 }
-
-
 
 }
-
 
 
 
@@ -154,7 +128,7 @@ class Player {
 		this.e = e;
 		this.color = color;
 		this.math = Math.PI * 2;
-		this.direction = "left";
+		// this.direction = "left";
 
 	}
 
@@ -194,6 +168,11 @@ class Player {
 
 			break;
 
+
+
+
+
+
 		}
 
 	}
@@ -227,69 +206,64 @@ function animateCanvas() {
 }
 
 
+
+// Problem : Not able to go at same time right now 
+
 document.addEventListener("keydown", function(event) {
 	const key = event.keyCode
 	console.log(key)
 
 	if(key == 39) {
 		playerOne.direction = "right"
-		console.log(playerOne.direction)
 		playerOne.x = playerOne.x + speed
 	}
 	else if(key == 38) {
 		playerOne.direction = "up"
-		console.log(playerOne.direction)
 		playerOne.y = playerOne.y - speed
 	}
 
 	else if(key == 37) {
 		playerOne.direction = "left"
-		console.log(playerOne.direction)
 		playerOne.x = playerOne.x - speed 
 	}
 
 	else if(key == 40) {
 		playerOne.direction = "down"
-		console.log(playerOne.direction)
 		playerOne.y = playerOne.y + speed
 
+		playerOne.move();
 
-
-	
 	}
 
 
-	
+
+	else if (key == 68) {
+		playerTwo.direction = "right"
+		playerTwo.x = playerTwo.x + speed
+	}
+	else if(key == 87) {
+		playerTwo.direction = "up"
+		playerTwo.y = playerTwo.y - speed
+	}
+
+	else if(key == 65) {
+		playerTwo.direction = "left"
+		playerTwo.x = playerTwo.x - speed
+	}
+
+	else if(key == 83) {
+		playerTwo.direction = "down"
+		playerTwo.y = playerTwo.y + speed
+
+		playerTwo.move();
+	}
+
+
+
 
 	ctx.clearRect(0, 0, canvas.width, canvas.height)
 	game.createCourse();
 	game.createObstacles(5)
-
-
-	// else if (key == 68) {
-	// 	playerTwo.direction = "right"
-		
-	// 	playerTwo.x = playerTwo.x + speed
-	// }
-	// else if(key == 87) {
-	// 	playerTwo.direction = "up"
-		
-	// 	playerTwo.y = playerTwo.y - speed
-	// }
-
-	// else if(key == 65) {
-	// 	playerTwo.direction = "left"
-
-	// 	playerTwo.x = playerTwo.x - speed
-	// }
-
-	// else if(key == 83) {
-	// 	playerTwo.direction = "down"
-
-	// 	playerTwo.y = playerTwo.y + speed
-	// }
-
-
 
 
 
@@ -297,9 +271,6 @@ document.addEventListener("keydown", function(event) {
 
 	playerTwo.makeBike();
 
-	playerOne.move();	
-// 
-	// playerTwo.move();
 
 
 
