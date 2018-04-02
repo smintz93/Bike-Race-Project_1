@@ -9,32 +9,73 @@ const canvas = document.getElementById("my-canvas");
 
 const ctx = canvas.getContext("2d");
 
+
+
+
+
 class Obstacle {
 	constructor(x, y, length) {
 		this.x = x;
 		this.y = y;
 		this.length = length;
-		// this.location2 = 157
-		// this.length2 = 140
+		this.speed = 1;
+	
 
 	}
+
 	drawLine() {
-		ctx.beginPath();
+		ctx.beginPath(); 
 		ctx.strokeStyle = "black"
 		ctx.moveTo(this.x, this.y);
+		// console.log("Moving the line")
 		ctx.lineTo(this.x, this.y + this.length);
+		// console.log(this.x, this.y, this.length)
 		ctx.stroke();
 
 
 	}
+
+	moveObstacles() {
+
+		this.y += this.speed
+
+		// console.log(this.y, this.speed)
+
+		if(this.y <= 0 || this.y > canvas.height) {
+			this.speed = this.speed * -1;
+		}
+
+
+		this.drawLine();
+		// Need to  tell it where to move it along Y axis
+			// entire height of each half
+			// canvas.height / 2 
+
+		// Need to tell it how fast to move the y axis
+			// speed variable
+
+	}
+
+
 	
 }
+
+
+
+
+
 
 
 const game = {
 	obstacles: [],
 	startLine: 35,
 	finishLine: 655,
+	startLineY1: 100,
+	startLineY2: 300,
+	lineLength: 40,
+
+
+
 
 	createCourse() {
 		// Middle Line 
@@ -62,13 +103,9 @@ const game = {
 	},
 
 
-
 	createObstacles(n) {
-		
 
-		// todraw evenly spaced lines, we need to 
 
-		// figure out how long the course is
 
 		const length = this.finishLine - this.startLine 
 
@@ -84,23 +121,31 @@ const game = {
 
 		for(let i = 1; i <= n; i++) {
 
-			const obst = new Obstacle(this.startLine + distance * i, 100, 40) 
 
-			const obstRow2 = new Obstacle(this.startLine + distance * i, 300, 40) 
-			obst.drawLine();
-			obstRow2.drawLine();
+			const obst = new Obstacle(this.startLine + distance * i, this.startLineY1, this.lineLength) 
+
+			// console.log(obst)
+
+			
+
+			const obstRow2 = new Obstacle(this.startLine + distance * i, this.startLineY2, this.lineLength) 
+
+
+			// console.log(obst, obstRow2)
 
 			this.obstacles.push(obst)
 			
 			this.obstacles.push(obstRow2)
 
+	
+
+			
 			
  
 		}
 
 
-	},
-
+	}
 
 
 
@@ -109,16 +154,14 @@ const game = {
 
 
 
-game.createCourse();
-game.createObstacles(5)
-// game.moveObstacles();
-
 // AN OBJECT IS AN INSTANCE OF A CLASS
 // WHEN YOU INSTANTIATE A CLASS YOU CREATE AN OBJECT BASED ON THAT BLUEPRINT
 // 'THIS' REFERS TO THAT PARTICULAR INSTANCE 
 
 
-let speed = 5;
+// START OF PLAYER // 
+
+let speed = 3;
 let keys = [];
 
 
@@ -137,7 +180,7 @@ class Player {
 
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.r, this.e, this.math)
-		console.log(this.x, this.y)
+		// console.log(this.x, this.y)
 
 		if (this.color === 1) {
 			ctx.fillStyle = "red"
@@ -159,6 +202,8 @@ const playerTwo = new Player(15,300,10,0,2)
 
 
 
+// This is the animate function
+
 function move() {
 
 		if(keys[39]) {
@@ -167,46 +212,34 @@ function move() {
 		}
 
 		if(keys[38]) {
-			// playerOne.direction = "up"
 			playerOne.y = playerOne.y - speed
 
 		}
 
 		if(keys[37]) {
-			// playerOne.direction = "left"
 			playerOne.x = playerOne.x - speed 
 		}
 		
 		if(keys[40]) {
-			// playerOne.direction = "left"
-			playerOne.x = playerOne.x - speed 	
+			playerOne.y = playerOne.y + speed 	
 
 		}
 
 		if(keys[68]) {
-			// playerTwo.direction = "right"
 			playerTwo.x = playerTwo.x + speed
 		}
 
 		if(keys[87]) {
-			// playerTwo.direction = "up"
 			playerTwo.y = playerTwo.y - speed
 
 		}
 
 		if(keys[65]) {
-			// playerTwo.direction = "left"
 			playerTwo.x = playerTwo.x - speed
 		}
 		
 		if(keys[83]) {
-			// playerTwo.direction = "down"
 			playerTwo.y = playerTwo.y + speed
-
-
-		
-
-
 
 	}
 
@@ -214,7 +247,19 @@ function move() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height)
 
 			game.createCourse();
-			game.createObstacles(5)
+
+
+
+
+			// Need to call the draw line function and move Obsta
+
+		for(let i = 0; i < game.obstacles.length; i++) {
+				game.obstacles[i].moveObstacles();
+
+		}
+		
+		
+			// moveObstacles();
 
 
 			playerOne.makeBike();
@@ -228,7 +273,12 @@ function move() {
 }
 
 
+function setup(){
+	// all the setup goes here
+	game.createObstacles(5);
+}
 
+setup();
 
 
 move();
@@ -236,11 +286,11 @@ move();
 
 document.body.addEventListener("keydown", function (e) {
     keys[e.keyCode] = true;
-    console.log(keys)
+    // console.log(keys)
 });
 document.body.addEventListener("keyup", function (e) {
     keys[e.keyCode] = false;
-    console.log(keys)
+    // console.log(keys)
 });
 
 
