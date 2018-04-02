@@ -1,3 +1,4 @@
+
 console.log("Bike Race")
 
 
@@ -118,6 +119,7 @@ game.createObstacles(5)
 
 
 let speed = 5;
+let keys = [];
 
 
 class Player {
@@ -128,14 +130,15 @@ class Player {
 		this.e = e;
 		this.color = color;
 		this.math = Math.PI * 2;
-		// this.direction = "left";
-
+		
 	}
 
 	makeBike() {
 
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.r, this.e, this.math)
+		console.log(this.x, this.y)
+
 		if (this.color === 1) {
 			ctx.fillStyle = "red"
 		} else {
@@ -144,39 +147,6 @@ class Player {
 		ctx.fill();
 		ctx.closePath();
 	}
-
-	// This is causing both players to move. 
-
-	move() {
-		switch(this.direction) {
-			case "right":
-				this.x = this.x + speed
-
-			break;
-
-			case "up":
-				this.y = this.y - speed
-			break;
-
-			case "down":
-				this.y = this.y + speed
-
-			break;
-
-			case "left":
-				this.x = this.x - speed
-
-			break;
-
-
-
-
-
-
-		}
-
-	}
-
 
 
 }
@@ -187,104 +157,91 @@ const playerOne = new Player(15,100,10,0,1)
 
 const playerTwo = new Player(15,300,10,0,2)
 
- // Need to clear the animation after its used 
+
+
+function move() {
+
+		if(keys[39]) {
+			playerOne.x = playerOne.x + speed
+
+		}
+
+		if(keys[38]) {
+			// playerOne.direction = "up"
+			playerOne.y = playerOne.y - speed
+
+		}
+
+		if(keys[37]) {
+			// playerOne.direction = "left"
+			playerOne.x = playerOne.x - speed 
+		}
+		
+		if(keys[40]) {
+			// playerOne.direction = "left"
+			playerOne.x = playerOne.x - speed 	
+
+		}
+
+		if(keys[68]) {
+			// playerTwo.direction = "right"
+			playerTwo.x = playerTwo.x + speed
+		}
+
+		if(keys[87]) {
+			// playerTwo.direction = "up"
+			playerTwo.y = playerTwo.y - speed
+
+		}
+
+		if(keys[65]) {
+			// playerTwo.direction = "left"
+			playerTwo.x = playerTwo.x - speed
+		}
+		
+		if(keys[83]) {
+			// playerTwo.direction = "down"
+			playerTwo.y = playerTwo.y + speed
+
+
+		
 
 
 
-function animateCanvas() {
+	}
 
-	ctx.clearRect(0,0, canvas.width, canvas.height)
-	playerOne.move(); // 
-	playerOne.makeBike();
-	playerTwo.move()
-	playerTwo.makeBike();	
 
-	
+			ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-	// window.requestAnimationFrame(animateCanvas);	
+			game.createCourse();
+			game.createObstacles(5)
+
+
+			playerOne.makeBike();
+
+			playerTwo.makeBike();	
+
+
+			window.requestAnimationFrame(move);	
+
 
 }
 
 
 
-// Problem : Not able to go at same time right now 
-
-document.addEventListener("keydown", function(event) {
-	const key = event.keyCode
-	console.log(key)
-
-	if(key == 39) {
-		playerOne.direction = "right"
-		playerOne.x = playerOne.x + speed
-	}
-	else if(key == 38) {
-		playerOne.direction = "up"
-		playerOne.y = playerOne.y - speed
-	}
-
-	else if(key == 37) {
-		playerOne.direction = "left"
-		playerOne.x = playerOne.x - speed 
-	}
-
-	else if(key == 40) {
-		playerOne.direction = "down"
-		playerOne.y = playerOne.y + speed
-
-		playerOne.move();
-
-	}
 
 
-
-	else if (key == 68) {
-		playerTwo.direction = "right"
-		playerTwo.x = playerTwo.x + speed
-	}
-	else if(key == 87) {
-		playerTwo.direction = "up"
-		playerTwo.y = playerTwo.y - speed
-	}
-
-	else if(key == 65) {
-		playerTwo.direction = "left"
-		playerTwo.x = playerTwo.x - speed
-	}
-
-	else if(key == 83) {
-		playerTwo.direction = "down"
-		playerTwo.y = playerTwo.y + speed
-
-		playerTwo.move();
-	}
+move();
 
 
-
-
-	ctx.clearRect(0, 0, canvas.width, canvas.height)
-	game.createCourse();
-	game.createObstacles(5)
-
-
-
-	playerOne.makeBike();
-
-	playerTwo.makeBike();
-
-
-
-
-})
-
-playerOne.makeBike();
-
-playerTwo.makeBike();
-
-
-
-
-
-
+document.body.addEventListener("keydown", function (e) {
+    keys[e.keyCode] = true;
+    console.log(keys)
+});
+document.body.addEventListener("keyup", function (e) {
+    keys[e.keyCode] = false;
+    console.log(keys)
+});
 
 
 
