@@ -14,13 +14,12 @@ const ctx = canvas.getContext("2d");
 
 
 class Obstacle {
-	constructor(x, y, length) {
+	constructor(x, y, length, top) {
 		this.x = x;
 		this.y = y;
 		this.length = length;
 		this.speed = 1;
-	
-
+		this.isOnTheTopRow = top;
 	}
 
 	drawLine() {
@@ -41,10 +40,30 @@ class Obstacle {
 
 		// console.log(this.y, this.speed)
 
-		if(this.y <= 0 || this.y > canvas.height) {
-			this.speed = this.speed * -1;
+		
+
+		if(this.isOnTheTopRow) {
+			if(this.y <= 0 || this.y + this.length > canvas.height/2) {
+				// console.log("this.y (" + this.y + ") <= 0");
+				// console.log("OR this.y(seeabove) + this.length (" + this.length + ") > canvas.height/2 (canvas.height = "+ canvas.height + ")");
+				this.speed = this.speed * -1; console.log("switching top")
+			} else {
+				// console.log("this.y: " + this.y)
+				// console.log("not switching top")
+			}
+		} 
+		else { // (bottom row)
+			// if it hits the top of this section or the bottom of this seection, then...
+			if(this.y <= canvas.height/2 || this.y + this.length > canvas.height) {
+				// ..."bounce" (reverse direction)
+				this.speed = this.speed * -1;
+			}
 		}
 
+
+		// if(this.y <= 200 || this.y + this.length >= canvas.height) {
+		// 	this.speed = this.speed * -1; console.log("switching bottom")
+		// }
 
 		this.drawLine();
 		// Need to  tell it where to move it along Y axis
@@ -105,49 +124,33 @@ const game = {
 
 	createObstacles(n) {
 
-
-
 		const length = this.finishLine - this.startLine 
-
-	
 
 		// figure out distance between the individual lines
 			// divide by n + 1 
 
 		const distance = length / (n + 1)
 
-
 		// move across length and draw line n times 
 
 		for(let i = 1; i <= n; i++) {
 
 
-			const obst = new Obstacle(this.startLine + distance * i, this.startLineY1, this.lineLength) 
+			const obst = new Obstacle(this.startLine + distance * i, this.startLineY1, this.lineLength, true) 
 
 			// console.log(obst)
 
-			
-
-			const obstRow2 = new Obstacle(this.startLine + distance * i, this.startLineY2, this.lineLength) 
-
+			const obstRow2 = new Obstacle(this.startLine + distance * i, this.startLineY2, this.lineLength, false) 
 
 			// console.log(obst, obstRow2)
 
 			this.obstacles.push(obst)
 			
-			this.obstacles.push(obstRow2)
-
-	
-
-			
-			
+			this.obstacles.push(obstRow2)			
  
 		}
 
-
 	}
-
-
 
 }
 
@@ -201,73 +204,70 @@ const playerOne = new Player(15,100,10,0,1)
 const playerTwo = new Player(15,300,10,0,2)
 
 
-
+let it;
 // This is the animate function
 
 function move() {
 
-		if(keys[39]) {
+		if(keys[39] && playerOne.x <= 685) {
 			playerOne.x = playerOne.x + speed
 
 		}
 
-		if(keys[38]) {
+		if(keys[38] && playerOne.y >= 15) {
 			playerOne.y = playerOne.y - speed
 
 		}
 
-		if(keys[37]) {
+		if(keys[37] && playerOne.x >= 15) {
 			playerOne.x = playerOne.x - speed 
 		}
 		
-		if(keys[40]) {
+		if(keys[40] && playerOne.y <=185) {
 			playerOne.y = playerOne.y + speed 	
 
 		}
 
-		if(keys[68]) {
+		if(keys[68] && playerTwo.x <= 685) {
 			playerTwo.x = playerTwo.x + speed
 		}
 
-		if(keys[87]) {
+		if(keys[87] && playerTwo.y >= 215) {
 			playerTwo.y = playerTwo.y - speed
 
 		}
 
-		if(keys[65]) {
+		if(keys[65] && playerTwo.x >= 15) {
 			playerTwo.x = playerTwo.x - speed
 		}
 		
-		if(keys[83]) {
+		if(keys[83] && playerTwo.y <= 385) {
 			playerTwo.y = playerTwo.y + speed
 
 	}
 
 
-			ctx.clearRect(0, 0, canvas.width, canvas.height)
+	ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-			game.createCourse();
-
-
+	game.createCourse();
 
 
-			// Need to call the draw line function and move Obsta
+	// Need to call the draw line function and move Obsta
 
-		for(let i = 0; i < game.obstacles.length; i++) {
-				game.obstacles[i].moveObstacles();
+	for(let i = 0; i < game.obstacles.length; i++) {
+		game.obstacles[i].moveObstacles();
 
-		}
-		
-		
-			// moveObstacles();
+	}
+	
+
+	// moveObstacles();
+
+	playerOne.makeBike();
+
+	playerTwo.makeBike();	
 
 
-			playerOne.makeBike();
-
-			playerTwo.makeBike();	
-
-
-			window.requestAnimationFrame(move);	
+	it = window.requestAnimationFrame(move);	
 
 
 }
@@ -286,7 +286,7 @@ move();
 
 document.body.addEventListener("keydown", function (e) {
     keys[e.keyCode] = true;
-    // console.log(keys)
+    console.log(keys)
 });
 document.body.addEventListener("keyup", function (e) {
     keys[e.keyCode] = false;
