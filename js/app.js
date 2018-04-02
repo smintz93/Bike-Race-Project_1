@@ -1,17 +1,9 @@
-
-console.log("Bike Race")
-
-
-
+console.log("Bike Race ")
 // CANVAS 
 
 const canvas = document.getElementById("my-canvas");
 
 const ctx = canvas.getContext("2d");
-
-
-
-
 
 class Obstacle {
 	constructor(x, y, length, top) {
@@ -38,15 +30,11 @@ class Obstacle {
 
 		this.y += this.speed
 
-		// console.log(this.y, this.speed)
-
-		
-
 		if(this.isOnTheTopRow) {
 			if(this.y <= 0 || this.y + this.length > canvas.height/2) {
 				// console.log("this.y (" + this.y + ") <= 0");
 				// console.log("OR this.y(seeabove) + this.length (" + this.length + ") > canvas.height/2 (canvas.height = "+ canvas.height + ")");
-				this.speed = this.speed * -1; console.log("switching top")
+				this.speed = this.speed * -1; //console.log("switching top")
 			} else {
 				// console.log("this.y: " + this.y)
 				// console.log("not switching top")
@@ -60,30 +48,44 @@ class Obstacle {
 			}
 		}
 
-
-		// if(this.y <= 200 || this.y + this.length >= canvas.height) {
-		// 	this.speed = this.speed * -1; console.log("switching bottom")
-		// }
-
 		this.drawLine();
-		// Need to  tell it where to move it along Y axis
-			// entire height of each half
-			// canvas.height / 2 
-
-		// Need to tell it how fast to move the y axis
-			// speed variable
 
 	}
-
-
-	
 }
 
+class Player {
+	constructor(x,y,r,e,color) {
+		this.x = x;
+		this.y = y;
+		this.r = r;
+		this.e = e;
+		this.color = color;
+		this.math = Math.PI * 2;
+		
+	}
 
+	makeBike() {
 
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.r, this.e, this.math)
 
+		if (this.color === 1) {
+			ctx.fillStyle = "red"
+		} else {
+			ctx.fillStyle = "blue"
+		}
+		ctx.fill();
+		ctx.closePath();
+	}
 
+}
 
+// GLOBAL VARS
+let speed = 3;
+let keys = [];
+let animationHandle; // This is a handle for stopping the animate function
+const playerOne = new Player(15,100,10,0,1);
+const playerTwo = new Player(15,300,10,0,2);
 
 const game = {
 	obstacles: [],
@@ -93,10 +95,7 @@ const game = {
 	startLineY2: 300,
 	lineLength: 40,
 
-
-
-
-	createCourse() {
+	drawCourse() {
 		// Middle Line 
 		ctx.beginPath();
 		ctx.strokeStyle = "yellow";
@@ -121,28 +120,19 @@ const game = {
 
 	},
 
-
 	createObstacles(n) {
 
 		const length = this.finishLine - this.startLine 
 
-		// figure out distance between the individual lines
-			// divide by n + 1 
-
+		// distance between the individual lines
 		const distance = length / (n + 1)
 
-		// move across length and draw line n times 
-
+		// draw n equally spaced lines
 		for(let i = 1; i <= n; i++) {
-
 
 			const obst = new Obstacle(this.startLine + distance * i, this.startLineY1, this.lineLength, true) 
 
-			// console.log(obst)
-
 			const obstRow2 = new Obstacle(this.startLine + distance * i, this.startLineY2, this.lineLength, false) 
-
-			// console.log(obst, obstRow2)
 
 			this.obstacles.push(obst)
 			
@@ -150,138 +140,79 @@ const game = {
  
 		}
 
-	}
+	},
 
+	setup(){
+		this.createObstacles(5);
+	}
 }
 
+// AnimationFrame is here 
+function animate() {
 
-
-
-// AN OBJECT IS AN INSTANCE OF A CLASS
-// WHEN YOU INSTANTIATE A CLASS YOU CREATE AN OBJECT BASED ON THAT BLUEPRINT
-// 'THIS' REFERS TO THAT PARTICULAR INSTANCE 
-
-
-// START OF PLAYER // 
-
-let speed = 3;
-let keys = [];
-
-
-class Player {
-	constructor(x,y,r,e,color) {
-		this.x = x;
-		this.y = y;
-		this.r = r;
-		this.e = e;
-		this.color = color;
-		this.math = Math.PI * 2;
-		
-	}
-
-	makeBike() {
-
-		ctx.beginPath();
-		ctx.arc(this.x, this.y, this.r, this.e, this.math)
-		// console.log(this.x, this.y)
-
-		if (this.color === 1) {
-			ctx.fillStyle = "red"
-		} else {
-			ctx.fillStyle = "blue"
-		}
-		ctx.fill();
-		ctx.closePath();
-	}
-
-
-}
-
-
-const playerOne = new Player(15,100,10,0,1)
-
-
-const playerTwo = new Player(15,300,10,0,2)
-
-
-let it;
-// This is the animate function
-
-function move() {
-
-		if(keys[39] && playerOne.x <= 685) {
-			playerOne.x = playerOne.x + speed
-
-		}
-
-		if(keys[38] && playerOne.y >= 15) {
-			playerOne.y = playerOne.y - speed
-
-		}
-
-		if(keys[37] && playerOne.x >= 15) {
-			playerOne.x = playerOne.x - speed 
-		}
-		
-		if(keys[40] && playerOne.y <=185) {
-			playerOne.y = playerOne.y + speed 	
-
-		}
-
-		if(keys[68] && playerTwo.x <= 685) {
-			playerTwo.x = playerTwo.x + speed
-		}
-
-		if(keys[87] && playerTwo.y >= 215) {
-			playerTwo.y = playerTwo.y - speed
-
-		}
-
-		if(keys[65] && playerTwo.x >= 15) {
-			playerTwo.x = playerTwo.x - speed
-		}
-		
-		if(keys[83] && playerTwo.y <= 385) {
-			playerTwo.y = playerTwo.y + speed
+	if(keys[39] && playerOne.x <= 685) {
+		playerOne.x = playerOne.x + speed
 
 	}
 
+	if(keys[38] && playerOne.y >= 15) {
+		playerOne.y = playerOne.y - speed
 
-	ctx.clearRect(0, 0, canvas.width, canvas.height)
+	}
 
-	game.createCourse();
-
-
-	// Need to call the draw line function and move Obsta
-
-	for(let i = 0; i < game.obstacles.length; i++) {
-		game.obstacles[i].moveObstacles();
-
+	if(keys[37] && playerOne.x >= 15) {
+		playerOne.x = playerOne.x - speed 
 	}
 	
+	if(keys[40] && playerOne.y <=185) {
+		playerOne.y = playerOne.y + speed 	
 
-	// moveObstacles();
+	}
 
+	if(keys[68] && playerTwo.x <= 685) {
+		playerTwo.x = playerTwo.x + speed
+	}
+
+	if(keys[87] && playerTwo.y >= 215) {
+		playerTwo.y = playerTwo.y - speed
+
+	}
+
+	if(keys[65] && playerTwo.x >= 15) {
+		playerTwo.x = playerTwo.x - speed
+	}
+	
+	if(keys[83] && playerTwo.y <= 385) {
+		playerTwo.y = playerTwo.y + speed
+
+	}
+
+	// erase entire screen
+	ctx.clearRect(0, 0, canvas.width, canvas.height)
+	// redraw lines
+	game.drawCourse();
+
+
+	// move obstacle objects (automatically calls drawLine() for each one)
+	for(let i = 0; i < game.obstacles.length; i++) {
+		game.obstacles[i].moveObstacles();
+	}
+	
 	playerOne.makeBike();
 
 	playerTwo.makeBike();	
 
-
-	it = window.requestAnimationFrame(move);	
-
+	// runs the animation
+	animationHandle = window.requestAnimationFrame(animate);	
 
 }
 
 
-function setup(){
-	// all the setup goes here
-	game.createObstacles(5);
-}
 
-setup();
+game.setup();
+animate(); 
 
 
-move();
 
 
 document.body.addEventListener("keydown", function (e) {
@@ -290,7 +221,7 @@ document.body.addEventListener("keydown", function (e) {
 });
 document.body.addEventListener("keyup", function (e) {
     keys[e.keyCode] = false;
-    // console.log(keys)
+    console.log(keys)
 });
 
 
