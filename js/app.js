@@ -151,70 +151,126 @@ const game = {
 
 		// Function to determine winner of the race
 
+		// Where to call this function?
+
 		if(playerOne.x >= 655)  {
 			
+			const ulWin = $("<ul>").text("Player One Wins")
+
+			$("aside").append(ulWin)
 
 			console.log("Player one wins")
 		}
-
 
 		else if(playerTwo.x >= 655)
 			console.log("Player two wins")
 	}
 
 
+
+
 }
+
+
 
 
 function collisionDectection() {
 
+// console.log(playerTwo.x+ playerTwo.r)
 
-	// Check the obstacle array(game.obstacles) to see if playerOne or playerTwo has collided with it 
 
-	// Radius of the player is 10
+	for(let i = 0; i < game.obstacles.length; i++) { 
+	 
+		if(playerOne.x + playerOne.r >= Math.round(game.obstacles[i].x -3) && playerOne.x + playerOne.r <= Math.round(game.obstacles[i].x +3) &&
+				
+			playerOne.y >= game.obstacles[i].y &&
 
-}
+			playerOne.y <= game.obstacles[i].y + game.obstacles[i].length) {
+
+			console.log("Player One Collision")
+		} 
+
+	}
+
+	for(let j = 0; j < game.obstacles.length; j++) {
+		if(playerTwo.x + playerTwo.r >= Math.round(game.obstacles[j].x -3) && playerTwo.x + playerTwo.r <= Math.round(game.obstacles[j].x + 3) &&
+
+			playerTwo.y >= game.obstacles[j].y &&
+
+			playerTwo.y <= game.obstacles[j].y + game.obstacles[j].length) {
+
+			console.log("Player Two Collision")
+		}
+	}
+
+	
+	 
+	}
+
 
 
 // AnimationFrame is here 
 function animate() {
 
+	// if right is pressed and p2 is to the left of the right side (-radius)
 	if(keys[39] && playerOne.x <= 685) {
+
+	 // collisionDectection();	
+		// moves p1 to the right by speed
 		playerOne.x = playerOne.x + speed
+
 
 	}
 
+	//  if up is pressed and p1 is to the bottom of the top side (-radius)
+
 	if(keys[38] && playerOne.y >= 15) {
+		// moves p1 up by speed
 		playerOne.y = playerOne.y - speed
 
 	}
 
+	//  if left is pressed and p1 is to the right of the left side (-radius)
 	if(keys[37] && playerOne.x >= 15) {
+		// moves p1 to the left by sppeed
 		playerOne.x = playerOne.x - speed 
 	}
 	
-	if(keys[40] && playerOne.y <=185) {
+	// 	 if down is pressed, and p1 is above middle line (-radius)
+	if(keys[40] && playerOne.y <= 185) {
+		// moves p1 to down by speed 
 		playerOne.y = playerOne.y + speed 	
 
 	}
 
+	// if d is pressed and p2 is to the left of the right side (-radius)
 	if(keys[68] && playerTwo.x <= 685) {
+		// moves p2 right by speed
 		playerTwo.x = playerTwo.x + speed
+
 	}
 
+	// if w is pressed and p2 is below the top (-radius)
 	if(keys[87] && playerTwo.y >= 215) {
+		// moves p2 up by speed 
 		playerTwo.y = playerTwo.y - speed
 
 	}
 
+	// if a is pressed and p2 is to the right of the left side (-radius)
 	if(keys[65] && playerTwo.x >= 15) {
+		// moves p2 to the left by speed
 		playerTwo.x = playerTwo.x - speed
 	}
 	
+	// if S is pressed, and p2 is above bottom (-radius)
 	if(keys[83] && playerTwo.y <= 385) {
+		// moves p2 down by speed px
 		playerTwo.y = playerTwo.y + speed
 
 	}
+
+
 
 	// erase entire screen
 	ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -231,7 +287,10 @@ function animate() {
 
 	playerTwo.makeBike();	
 
-	game.determineWinner();
+	collisionDectection();
+
+
+
 
 	// runs the animation
 	animationHandle = window.requestAnimationFrame(animate);	
@@ -242,9 +301,12 @@ function animate() {
 
 
 
+
 game.setup();
 
+
 animate(); 
+
 
 
 
