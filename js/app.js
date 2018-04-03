@@ -10,7 +10,7 @@ class Obstacle {
 		this.x = x;
 		this.y = y;
 		this.length = length;
-		this.speed = 1;
+		this.speed = 2;
 		this.isOnTheTopRow = top;
 	}
 
@@ -87,6 +87,7 @@ let animationHandle; // This is a handle for stopping the animate function
 const playerOne = new Player(15,100,10,0,1);
 const playerTwo = new Player(15,300,10,0,2);
 
+
 const game = {
 	obstacles: [],
 	startLine: 35,
@@ -144,8 +145,36 @@ const game = {
 
 	setup(){
 		this.createObstacles(5);
+	},
+
+	determineWinner(){
+
+		// Function to determine winner of the race
+
+		if(playerOne.x >= 655)  {
+			
+
+			console.log("Player one wins")
+		}
+
+
+		else if(playerTwo.x >= 655)
+			console.log("Player two wins")
 	}
+
+
 }
+
+
+function collisionDectection() {
+
+
+	// Check the obstacle array(game.obstacles) to see if playerOne or playerTwo has collided with it 
+
+	// Radius of the player is 10
+
+}
+
 
 // AnimationFrame is here 
 function animate() {
@@ -202,26 +231,34 @@ function animate() {
 
 	playerTwo.makeBike();	
 
+	game.determineWinner();
+
 	// runs the animation
 	animationHandle = window.requestAnimationFrame(animate);	
+
+
 
 }
 
 
 
 game.setup();
+
 animate(); 
 
 
 
 
-document.body.addEventListener("keydown", function (e) {
+$("body").on("keydown", function (e) {
     keys[e.keyCode] = true;
-    console.log(keys)
+
 });
-document.body.addEventListener("keyup", function (e) {
+
+
+
+$("body").on("keyup", function (e) {
     keys[e.keyCode] = false;
-    console.log(keys)
+  
 });
 
 
