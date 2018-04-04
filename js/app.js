@@ -94,7 +94,7 @@ const game = {
 	finishLine: 655,
 	startLineY1: 100,
 	startLineY2: 300,
-	lineLength: 40,
+	lineLength: 50,
 
 	drawCourse() {
 		// Middle Line 
@@ -157,15 +157,18 @@ const game = {
 			
 			const ulWin = $("<ul>").text("Player One Wins")
 
-			$("aside").append(ulWin)
+			// $("aside").append(ulWin)
 
-			console.log("Player one wins")
+			return "Player one wins"
+
+			window.cancelAnimationFrame();
 		}
 
-		else if(playerTwo.x >= 655)
-			console.log("Player two wins")
-	}
+		else if(playerTwo.x >= 655) 
 
+
+			return "Player two wins"
+	}
 
 
 
@@ -174,36 +177,45 @@ const game = {
 
 
 
-function collisionDectection() {
+function collisionDectection(x,y) {
 
 // console.log(playerTwo.x+ playerTwo.r)
 
 
+
 	for(let i = 0; i < game.obstacles.length; i++) { 
 	 
-		if(playerOne.x + playerOne.r >= Math.round(game.obstacles[i].x -3) && playerOne.x + playerOne.r <= Math.round(game.obstacles[i].x +3) &&
+		if(playerOne.x + playerOne.r >= Math.round(game.obstacles[i].x -2) && playerOne.x + playerOne.r <= Math.round(game.obstacles[i].x +2) &&
 				
 			playerOne.y >= game.obstacles[i].y &&
 
 			playerOne.y <= game.obstacles[i].y + game.obstacles[i].length) {
 
-			console.log("Player One Collision")
+			// console.log("Player One Collision")
+			return true;
+
 		} 
+
+
+
+
 
 	}
 
 	for(let j = 0; j < game.obstacles.length; j++) {
-		if(playerTwo.x + playerTwo.r >= Math.round(game.obstacles[j].x -3) && playerTwo.x + playerTwo.r <= Math.round(game.obstacles[j].x + 3) &&
+		if(playerTwo.x + playerTwo.r >= Math.round(game.obstacles[j].x -2) && playerTwo.x + playerTwo.r <= Math.round(game.obstacles[j].x + 2) &&
 
 			playerTwo.y >= game.obstacles[j].y &&
 
 			playerTwo.y <= game.obstacles[j].y + game.obstacles[j].length) {
 
-			console.log("Player Two Collision")
+			// console.log("Player Two Collision")
+			return true;
+		
 		}
 	}
 
-	
+			return false;
 	 
 	}
 
@@ -213,10 +225,17 @@ function collisionDectection() {
 function animate() {
 
 	// if right is pressed and p2 is to the left of the right side (-radius)
+	//  UNLESS IT IS HITTING THE LINE 
 	if(keys[39] && playerOne.x <= 685) {
 
-	 // collisionDectection();	
+
+	const obstacleHit =  collisionDectection(playerOne.x, playerOne.y + speed)
 		// moves p1 to the right by speed
+	if(obstacleHit) {
+
+
+	} else 
+
 		playerOne.x = playerOne.x + speed
 
 
@@ -246,7 +265,17 @@ function animate() {
 	// if d is pressed and p2 is to the left of the right side (-radius)
 	if(keys[68] && playerTwo.x <= 685) {
 		// moves p2 right by speed
-		playerTwo.x = playerTwo.x + speed
+
+		const obstacleHit = collisionDectection(playerTwo.x, playerTwo.y + speed)
+
+		if(obstacleHit) {
+
+		} else {
+
+			playerTwo.x = playerTwo.x + speed
+		}
+
+
 
 	}
 
@@ -270,8 +299,6 @@ function animate() {
 
 	}
 
-
-
 	// erase entire screen
 	ctx.clearRect(0, 0, canvas.width, canvas.height)
 	// redraw lines
@@ -292,20 +319,23 @@ function animate() {
 
 
 
+
 	// runs the animation
 	animationHandle = window.requestAnimationFrame(animate);	
 
-
+	game.determineWinner();	
 
 }
-
 
 
 
 game.setup();
 
 
+
+
 animate(); 
+
 
 
 
