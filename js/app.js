@@ -18,9 +18,7 @@ class Obstacle {
 		ctx.beginPath(); 
 		ctx.strokeStyle = "black"
 		ctx.moveTo(this.x, this.y);
-		// console.log("Moving the line")
 		ctx.lineTo(this.x, this.y + this.length);
-		// console.log(this.x, this.y, this.length)
 		ctx.stroke();
 
 	}
@@ -160,10 +158,6 @@ const game = {
 
 	menu(){
 
-	// I want this to also feature a start gmae button which kicks off the game	as well as timer 
-
-
-
 	
 		const modal = $("#simple-modal");
 		const modalBtn = $("#modalBtn");
@@ -195,12 +189,11 @@ const game = {
 			
 		}
 
-		// game.drawCourse();
-		// playerOne.initialize();
+		game.drawCourse();
+		playerOne.initialize();
 
-		// playerTwo.initialize();
+		playerTwo.initialize();
 
-	// THIS button does nothing 
 
 		const start = function() {
 
@@ -221,13 +214,10 @@ const game = {
 
 				game.setup();
 
-
-
 		
 		})
 
 		
-
 		}
 
 
@@ -235,7 +225,6 @@ const game = {
 
 
 	},
-
 
 
 	setup(){
@@ -264,7 +253,6 @@ const game = {
 
 			time = 3;
 
-
 			playerOne.initialize();
 			playerTwo.initialize();
 			
@@ -281,7 +269,6 @@ const game = {
 		}
 
 		timer();
-
 
 
 	},
@@ -301,10 +288,6 @@ const game = {
 			console.log("Player one wins")
 
 			$("#winner").text("Player One Wins!")
-
-			// if(game.p1Points > 2) {
-			// 	console.log("Player one wins the game")
-			// }
 
 			return true;
 
@@ -342,9 +325,21 @@ const game = {
 
 	gameover() {
 
-		if(game.p1Points > 3 || game.p2Points > 3) {
-			window.alert("gameover")
+		if(game.p1Points === 3 || game.p2Points === 3) {
 
+			if(game.p1Points > game.p2Points) {
+				console.log("Player One wins game")
+				window.alert("Player One wins")
+
+			} else {
+				console.log("Player two wins game") 
+				window.alert("Player Two wins")
+			}
+
+
+			console.log("the game should end")
+
+			return true
 			 
 		}
 	}   
@@ -481,7 +476,6 @@ function animate() {
 
 	if(game.determineWinner() == true || game.determineWinner() == true){
 
-
 		game.setup();
 
 	
@@ -489,10 +483,10 @@ function animate() {
 		
 	}   
 
+		if(game.gameover() ==  true) {
 
-
-
-
+		return;
+	}
 
 
 	// runs the animation
@@ -504,6 +498,7 @@ function animate() {
 
 game.menu();
 // game.setup();
+
 
 
 $("body").on("keydown", function (e) {
