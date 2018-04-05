@@ -96,6 +96,7 @@ class Player {
 // GLOBAL VARS
 let speed = 3;
 let keys = [];
+let time = 4;
 let animationHandle; // This is a handle for stopping the animate function
 const playerOne = new Player(100, 1);
 const playerTwo = new Player(300, 2);
@@ -159,33 +160,103 @@ const game = {
 
 	},
 
+	menu(){
+
+		const modal = $("#simple-modal");
+		const modalBtn = $("#modalBtn");
+		const closeBtn = $(".closeBtn")
+
+		$(modalBtn).on("click", openModal)
+
+		$(closeBtn).on("click", closeModal)
+
+		function openModal() {
+
+			$(".modal").attr("style","display:block");
+
+		}
+
+		function closeModal() {
+
+			$(".modal").attr("style","display:none");
+
+		}
+
+		function clickOutside(e) {
+
+			if(e.target == $("#simple-modal")) {
+
+
+			modal.attr("style","display:none");
+		}
+			
+		}
+
+
+		game.drawCourse();
+		playerOne.initialize();
+
+		playerTwo.initialize();
+
+
+
+	},
+
 	setup(){
 
-		// erase canvas
+	
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-
-		// redraw course and obstacles
 		game.drawCourse();
-
-		// delete obstacles here
-
 
 		this.obstacles.length = 0;
 
-		
-		// create different amount of obstacles based on round number? 
 		this.createObstacles(5);
 
-		
 		playerOne.initialize();
+
 		playerTwo.initialize();
+
+		const timer = setInterval(() => {
+		time --
+		console.log(time)
+
+		if(time === 0) {
+			clearInterval(timer)
+
+			time = 3;
+
+
+			playerOne.initialize();
+			playerTwo.initialize();
+			
+			animate();
+			
+		}
+
+			$("#timer").text(time)
+
+
+		}, 1000);
+
+
+
+
+
+		// this.obstacles.length = 0;
+
+
+		// create different amount of obstacles based on round number? 
+		// this.createObstacles(5);
+
+		
+		// playerOne.initialize();
+		// playerTwo.initialize();
 
 		// playerOne.makeBike();	
 		// playerTwo.makeBike();
 
-
-		animate();
+		// animate();
 
 		// this.gameover();
 
@@ -379,11 +450,9 @@ function animate() {
 
 	if(game.determineWinner() == true || game.determineWinner() == true){
 
-
 		game.setup();
 
-		game.gameover();
-
+		// game.gameover();
 		return;
 		
 	}   
@@ -395,6 +464,8 @@ function animate() {
 } // animate
 
 
+
+game.menu();
 game.setup();
 
 
