@@ -5,6 +5,10 @@ const canvas = document.getElementById("my-canvas");
 
 const ctx = canvas.getContext("2d");
 
+const bikeImage = new Image()
+bikeImage.src = "bike1.png"
+
+
 class Obstacle {
 	constructor(x, y, length, top) {
 		this.x = x;
@@ -48,13 +52,14 @@ class Obstacle {
 }
 
 class Player {
-	constructor(y, playerNumber) {
+	constructor(y) {
 		this.x = 15;
 		this.y = y;
-		this.r = 10;
+		this.r = 20;
 		this.e = 0;
-		this.playerNumber = playerNumber;
+		// this.playerNumber = playerNumber;
 		this.math = Math.PI * 2;
+	
 		
 	}
 
@@ -63,11 +68,11 @@ class Player {
 		this.x = 15;
 	
 		// reset y
-		if(this.playerNumber === 1) {
-			this.y = 100;
-		} else {
-			this.y = 300;
-		}
+		// if(this.playerNumber === 1) {
+		// 	this.y = 100;
+		// } else {
+		// 	this.y = 300;
+		// }
 		
 		this.makeBike();
 	}
@@ -75,15 +80,20 @@ class Player {
 	makeBike() {
 
 		ctx.beginPath();
-		ctx.arc(this.x, this.y, this.r, this.e, this.math)
+		// ctx.arc(this.x, this.y, this.r, this.e, this.math)
 		
 
-		if (this.playerNumber === 1) {
-			ctx.fillStyle = "red"
-		} else {
-			ctx.fillStyle = "blue"
-		}
-		ctx.fill();
+		// if (this.playerNumber === 1) {
+		// 	ctx.fillStyle = "red"
+		// } else {
+		// 	ctx.fillStyle = "blue"
+		// }
+		// ctx.fill();
+	
+
+
+		ctx.drawImage(bikeImage, 0, 0, 120, 120, this.x -20, this.y -20, 40, 40)
+
 		ctx.closePath();
 	}
 
@@ -193,18 +203,11 @@ const game = {
 
 			$("#start").on("click", () => {
 
-				console.log("I am a Click")
-
-				// game.drawCourse();
-
-				// game.createObstacles(5);
-
 				playerOne.initialize();
 
 				playerTwo.initialize();
 
-				// animate();
-
+	
 				game.setup();
 
 			})
@@ -368,6 +371,7 @@ function collisionDectection(x,y) {
 	}
 
 	for(let j = 0; j < game.obstacles.length; j++) {
+
 		if(playerTwo.x + playerTwo.r >= Math.round(game.obstacles[j].x -2) && playerTwo.x + playerTwo.r <= Math.round(game.obstacles[j].x + 2) &&
 
 			playerTwo.y >= game.obstacles[j].y &&
