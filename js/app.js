@@ -31,18 +31,15 @@ class Obstacle {
 
 		if(this.isOnTheTopRow) {
 			if(this.y <= 0 || this.y + this.length > canvas.height/2) {
-				// console.log("this.y (" + this.y + ") <= 0");
-				// console.log("OR this.y(seeabove) + this.length (" + this.length + ") > canvas.height/2 (canvas.height = "+ canvas.height + ")");
-				this.speed = this.speed * -1; //console.log("switching top")
+
+				this.speed = this.speed * -1; 
 			} else {
-				// console.log("this.y: " + this.y)
-				// console.log("not switching top")
+
 			}
 		} 
-		else { // (bottom row)
-			// if it hits the top of this section or the bottom of this seection, then...
+		else { 
 			if(this.y <= canvas.height/2 || this.y + this.length > canvas.height) {
-				// ..."bounce" (reverse direction)
+
 				this.speed = this.speed * -1;
 			}
 		}
@@ -160,8 +157,15 @@ const game = {
 
 	},
 
+
 	menu(){
 
+
+	// I want this to also feature a start gmae button which kicks off the game	as well as timer 
+
+
+
+	
 		const modal = $("#simple-modal");
 		const modalBtn = $("#modalBtn");
 		const closeBtn = $(".closeBtn")
@@ -192,19 +196,51 @@ const game = {
 			
 		}
 
+		// game.drawCourse();
+		// playerOne.initialize();
 
-		game.drawCourse();
-		playerOne.initialize();
+		// playerTwo.initialize();
 
-		playerTwo.initialize();
+	// THIS button does nothing 
 
+		// const start = function() {
+
+
+		// 	$("#start").on("click", () => {
+
+		// 		console.log("I am a Click")
+
+		// 		game.drawCourse();
+
+		// 		game.createObstacles(5);
+
+		// 		playerOne.initialize();
+
+		// 		playerTwo.initialize();
+
+		// 		animate();
+
+
+
+
+		
+		// })
+
+		
+
+		// }
+
+
+		// start();
 
 
 	},
 
+
+
 	setup(){
 
-	
+
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 
 		game.drawCourse();
@@ -217,7 +253,9 @@ const game = {
 
 		playerTwo.initialize();
 
-		const timer = setInterval(() => {
+		function timer() {
+
+			const timer = setInterval(() => {
 		time --
 		console.log(time)
 
@@ -239,26 +277,12 @@ const game = {
 
 		}, 1000);
 
+			
+		}
+
+		timer();
 
 
-
-
-		// this.obstacles.length = 0;
-
-
-		// create different amount of obstacles based on round number? 
-		// this.createObstacles(5);
-
-		
-		// playerOne.initialize();
-		// playerTwo.initialize();
-
-		// playerOne.makeBike();	
-		// playerTwo.makeBike();
-
-		// animate();
-
-		// this.gameover();
 
 	},
 
@@ -278,6 +302,10 @@ const game = {
 
 			$("#winner").text("Player One Wins!")
 
+			// if(game.p1Points > 2) {
+			// 	console.log("Player one wins the game")
+			// }
+
 			return true;
 
 		}
@@ -294,7 +322,11 @@ const game = {
 
 		 	console.log("Player two wins")
 
-		 	$("#winner").text("Player Two Wins")		
+		 	$("#winner").text("Player Two Wins")	
+
+		 // 	if(game.p2Points > 2) {
+			// 	console.log("Player two wins the game")
+			// }
 		 
 		 	return true;
 
@@ -310,13 +342,12 @@ const game = {
 
 	gameover() {
 
-		if(game.p1Points === 3 || game.p2Points === 3) {
+		if(game.p1Points > 3 || game.p2Points > 3) {
 			window.alert("gameover")
 
-			// stop animation 
+			 
 		}
 	}   
-
 
 
 }
@@ -452,10 +483,15 @@ function animate() {
 
 		game.setup();
 
-		// game.gameover();
+	
 		return;
 		
 	}   
+
+
+
+
+
 
 
 	// runs the animation
