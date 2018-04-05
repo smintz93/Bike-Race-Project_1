@@ -76,6 +76,7 @@ class Player {
 
 		ctx.beginPath();
 		ctx.arc(this.x, this.y, this.r, this.e, this.math)
+		
 
 		if (this.playerNumber === 1) {
 			ctx.fillStyle = "red"
@@ -179,14 +180,7 @@ const game = {
 
 		}
 
-		function clickOutside(e) {
 
-			if(e.target == $("#simple-modal")) {
-
-				modal.attr("style","display:none");
-			}
-			
-		}
 
 		game.drawCourse();
 		playerOne.initialize();
@@ -263,7 +257,7 @@ const game = {
 			}, 1000);
 
 			
-		}// timer
+		}
 
 		timer();
 
@@ -302,10 +296,6 @@ const game = {
 
 		 	$("#winner").text("Player Two Wins")	
 
-		 // 	if(game.p2Points > 2) {
-			// 	console.log("Player two wins the game")
-			// }
-		 
 		 	return true;
 
 		} else {
@@ -319,15 +309,33 @@ const game = {
 	// if someone won, tell us who it is
 	gameover() { console.log("gameover")
 
+		const closeBtn = $(".closeBtn")
+
+		$(closeBtn).on("click", closeModal)
+
+		function closeModal() {
+
+		$(".modal1").attr("style","display:none");
+
+		$(".modal2").attr("style","display:none");
+
+		}
+
+
+
 		if(game.p1Points === 3 || game.p2Points === 3) {
 
 			if(game.p1Points > game.p2Points) {
 				console.log("Player One wins game")
-				window.alert("Player One wins")
+
+	
+				$(".modal1").attr("style","display:block");
+				
 
 			} else {
 				console.log("Player two wins game") 
-				window.alert("Player Two wins")
+				$(".modal2").attr("style","display:block");
+			
 			}
 
 
@@ -488,7 +496,7 @@ function animate() {  console.log("animate")
 
 
 game.menu();
-// game.setup();
+
 
 
 
