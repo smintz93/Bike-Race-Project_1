@@ -4,17 +4,12 @@ body {
 	background-size: 1000px 800px;
 }
 
-
 #my-canvas {
 	background-color: rgb(128, 128, 128);
 	display: inline-block;
 	margin-left: 100px;
 	margin-top: 275px;
-
-
 }
-
-
 
 aside {
 	height: 400px;
@@ -25,7 +20,6 @@ aside {
 	background-color: grey;
 	float: left;
 	margin-top: 275px;
-
 }
 	
 h1 {
@@ -33,44 +27,34 @@ h1 {
 	text-align: center;
 	border: 1px solid black;
 	font-family: Georgia, serif;
-
 }
 
-
-h3  {
+h3 {
 	margin-top: auto;
-	margin-bottom: 15px;
-
-	
+	margin-bottom: 15px;	
 }
 
 h4 {
 	margin-top: 1px;
 	margin-bottom: 7px;
 	padding: none;
-
 	
 }
 
 div {
 	font-family: Georgia, serif;
-
 }
 
- #player-one {
+#player-one {
 	height: 65px;
 	background-color: red;
 	border-bottom: 1px solid black;
-
-
-	
 }
 
 #player-two {
 	height: 65px;
 	background-color: lightblue;
 	border-bottom: 1px solid black;
-
 }
 
 #timer	{
@@ -86,17 +70,12 @@ div {
 	font-size: 40px;
 	padding-top: 15px;
 	margin-top: 275px;
-
-
-
 }
-
 
 #winner {
 	margin-top: 10px;
 	text-align: center;
-	font-size: 20px;
-	margin-bottom: 10px;
+	font-size: 20px;	margin-bottom: 10px;
 
 }
 
@@ -149,7 +128,6 @@ div {
 	cursor: pointer;
 }
 
-
 #start{	
 	background-color: yellow;
 	padding: 1px 2px;
@@ -158,18 +136,26 @@ div {
 	margin-left: 20%;
 	font-size: 15px;
 	margin-bottom: 10px;
-}
-	
+}	
 
 #start:hover{
 	background: darkgrey;
 	cursor: pointer;
 }
 
-
-
 .modal1 {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	height: 100%;
+	width: 100%;
+	overflow: auto;
+	background-color: rgba(0,0,0,0.5);
+}
 
+.modal2 {
 	display: none;
 	position: fixed;
 	z-index: 1;
@@ -182,20 +168,16 @@ div {
 
 }
 
+#refresh {
+	background-color: yellow;
+	display: block;
+	margin-left: 130px;
+	margin-top: 20px;
+	height: 25px;
+}
 
-
-
-.modal2 {
-
-	display: none;
-	position: fixed;
-	z-index: 1;
-	left: 0;
-	top: 0;
-	height: 100%;
-	width: 100%;
-	overflow: auto;
-	background-color: rgba(0,0,0,0.5);
-
+#refresh:hover {
+	background: darkgrey;
+	cursor: pointer;
 }
 

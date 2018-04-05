@@ -32,7 +32,6 @@ class Obstacle {
 		this.y += this.speed
 
 		if(this.isOnTheTopRow) {
-
 			if(this.y <= 0 || this.y + this.length > canvas.height/2) {
 
 				this.speed = this.speed * -1; 
@@ -41,7 +40,6 @@ class Obstacle {
 			}
 		} 
 		else { 
-
 			if(this.y <= canvas.height/2 || this.y + this.length > canvas.height) {
 
 				this.speed = this.speed * -1;
@@ -54,38 +52,37 @@ class Obstacle {
 }
 
 class Player {
-	constructor(y) {
+	constructor(y, playerNumber) {
 		this.x = 15;
 		this.y = y;
 		this.r = 10;
 		this.e = 0;
-		// this.playerNumber = playerNumber;
+		this.playerNumber = playerNumber;
 		this.math = Math.PI * 2;
-	
 		
 	}
 
 	initialize() {
 		// reset x
-		// this.x = 15;
+		this.x = 15;
 	
 		// reset y
-		// if(this.playerNumber === 1) {
-		// 	this.y = 100;
-		// } else {
-		// 	this.y = 300;
-		// }
+		if(this.playerNumber === 1) {
+			this.y = 100;
+		} else {
+			this.y = 300;
+		}
 		
-		
+		// ctx.drawImage(bikeImage, 0, 0, 120, 120, this.x -20, this.y -20, 40, 40)
 
 		this.makeBike();
-
 
 	}
 
 	makeBike() {
 
 		// ctx.beginPath();
+
 		// ctx.arc(this.x, this.y, this.r, this.e, this.math)
 		
 
@@ -95,12 +92,10 @@ class Player {
 		// 	ctx.fillStyle = "blue"
 		// }
 		// ctx.fill();
-	
-
 
 		ctx.drawImage(bikeImage, 0, 0, 120, 120, this.x -20, this.y -20, 40, 40)
 
-		ctx.closePath();
+		// ctx.closePath();
 	}
 
 }
@@ -110,8 +105,8 @@ let speed = 3;
 let keys = [];
 let time = 4;
 let animationHandle; // This is a handle for stopping the animate function
-const playerOne = new Player(100, 1);
-const playerTwo = new Player(300, 2);
+const playerOne = new Player(100,1);
+const playerTwo = new Player(300,2);
 
 
 const game = {
@@ -175,7 +170,6 @@ const game = {
 
 	menu(){
 
-	
 		const modal = $("#simple-modal");
 		const modalBtn = $("#modalBtn");
 		const closeBtn = $(".closeBtn")
@@ -196,11 +190,10 @@ const game = {
 
 		}
 
-
-
 		game.drawCourse();
 
 		playerOne.initialize();
+
 		playerTwo.initialize();
 
 
@@ -225,7 +218,7 @@ const game = {
 	},
 
 
-	setup() {
+	setup() { console.log("setup")
 
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -237,6 +230,7 @@ const game = {
 		this.createObstacles(5);
 
 		playerOne.initialize();
+
 		playerTwo.initialize();
 
 		function timer() { console.log("timer started")
@@ -271,8 +265,7 @@ const game = {
 	},
 
 
-	determineWinner() { 
-
+	determineWinner(){ console.log("determineWinner")
 
 		if(playerOne.x >= 655)  {
 			
@@ -313,7 +306,7 @@ const game = {
 	},
 
 	// if someone won, tell us who it is
-	gameover() {
+	gameover() { console.log("gameover")
 
 		const closeBtn = $(".closeBtn")
 
@@ -327,25 +320,19 @@ const game = {
 
 		}
 
-
-
 		if(game.p1Points === 3 || game.p2Points === 3) {
 
 			if(game.p1Points > game.p2Points) {
-				console.log("Player One wins game")
 
-	
 				$(".modal1").attr("style","display:block");
 				
 
 			} else {
-				console.log("Player two wins game") 
+			
 				$(".modal2").attr("style","display:block");
 			
 			}
 
-
-			console.log("the game should end")
 
 			return true
 			 
@@ -393,7 +380,7 @@ function collisionDectection(x,y) {
 
 
 // AnimationFrame is here 
-function animate() {  
+function animate() {  console.log("animate")
 
  
 	if(keys[39] && playerOne.x <= 685) {
@@ -471,6 +458,7 @@ function animate() {
 	}
 	
 	playerOne.makeBike();
+
 	playerTwo.makeBike();	
 
 	collisionDectection();
@@ -495,16 +483,18 @@ function animate() {
 	// runs the animation
 	animationHandle = window.requestAnimationFrame(animate);	
 
-} 
+} // animate
+
 
 game.menu();
+
+
 
 
 $("body").on("keydown", function (e) {
     keys[e.keyCode] = true;
 
 });
-
 
 
 $("body").on("keyup", function (e) {
