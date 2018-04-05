@@ -18,7 +18,7 @@ class Obstacle {
 		ctx.beginPath(); 
 		ctx.strokeStyle = "black"
 		ctx.moveTo(this.x, this.y);
-		ctx.lineTo(this.x, this.y + this.length);
+		ctx.lineTo(this.x, this.y + this.length);	
 		ctx.stroke();
 
 	}
@@ -183,9 +183,8 @@ const game = {
 
 			if(e.target == $("#simple-modal")) {
 
-
-			modal.attr("style","display:none");
-		}
+				modal.attr("style","display:none");
+			}
 			
 		}
 
@@ -214,10 +213,8 @@ const game = {
 
 				game.setup();
 
-		
-		})
+			})
 
-		
 		}
 
 
@@ -227,7 +224,7 @@ const game = {
 	},
 
 
-	setup(){
+	setup() { console.log("setup")
 
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -242,31 +239,31 @@ const game = {
 
 		playerTwo.initialize();
 
-		function timer() {
+		function timer() { console.log("timer started")
 
 			const timer = setInterval(() => {
-		time --
-		console.log(time)
+				time--
+				console.log(time)
 
-		if(time === 0) {
-			clearInterval(timer)
+				if(time === 0) {
+					clearInterval(timer)
 
-			time = 3;
+					time = 3;
 
-			playerOne.initialize();
-			playerTwo.initialize();
+					playerOne.initialize();
+					playerTwo.initialize();
+					
+					animate();
+					
+				}
+
+				$("#timer").text(time)
+
+
+			}, 1000);
+
 			
-			animate();
-			
-		}
-
-			$("#timer").text(time)
-
-
-		}, 1000);
-
-			
-		}
+		}// timer
 
 		timer();
 
@@ -274,12 +271,12 @@ const game = {
 	},
 
 
-	determineWinner(){
+	determineWinner(){ console.log("determineWinner")
 
 
 		if(playerOne.x >= 655)  {
 			
-			game.p1Points ++ 
+			game.p1Points++ 
 
 			game.round += 1 
 
@@ -293,11 +290,9 @@ const game = {
 
 		}
 
-
-
 		 if(playerTwo.x >= 655) {
 
-		 	game.p2Points ++
+		 	game.p2Points++
 
 		 	game.round += 1 
 
@@ -317,13 +312,12 @@ const game = {
 
 		 	return 0;
 
-
 		}		
 
-		
 	},
 
-	gameover() {
+	// if someone won, tell us who it is
+	gameover() { console.log("gameover")
 
 		if(game.p1Points === 3 || game.p2Points === 3) {
 
@@ -348,12 +342,8 @@ const game = {
 }
 
 
-
+// for the obstacles
 function collisionDectection(x,y) {
-
-// console.log(playerTwo.x+ playerTwo.r)
-
-
 
 	for(let i = 0; i < game.obstacles.length; i++) { 
 	 
@@ -363,7 +353,6 @@ function collisionDectection(x,y) {
 
 			playerOne.y <= game.obstacles[i].y + game.obstacles[i].length) {
 
-			// console.log("Player One Collision")
 			return true;
 
 		} 
@@ -377,20 +366,19 @@ function collisionDectection(x,y) {
 
 			playerTwo.y <= game.obstacles[j].y + game.obstacles[j].length) {
 
-			// console.log("Player Two Collision")
 			return true;
 		
 		}
 	}
 
-			return false;
+	return false;
 	 
 }
 
 
 
 // AnimationFrame is here 
-function animate() {
+function animate() {  console.log("animate")
 
  
 	if(keys[39] && playerOne.x <= 685) {
@@ -473,20 +461,23 @@ function animate() {
 
 	collisionDectection();
 
+	// if someone crossed the finish line
+	if(game.determineWinner()){
 
-	if(game.determineWinner() == true || game.determineWinner() == true){
+		// reset game if none has 3 yet
+		if(game.p1Points < 3 && game.p2Points < 3) {
+			game.setup();
+		}
 
-		game.setup();
-
+		// prints winner (3/5) if there was one
+		game.gameover()
 	
+		// once someone crosses the finish line, we always want to stop the animation
 		return;
 		
 	}   
 
-		if(game.gameover() ==  true) {
 
-		return;
-	}
 
 
 	// runs the animation
