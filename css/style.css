@@ -27,11 +27,10 @@ aside {
 }
 	
 h1 {
-
-		margin-top: auto;
-		text-align: center;
-		border: 1px solid black;
-		font-family: Georgia, serif;
+	margin-top: auto;
+	text-align: center;
+	border: 1px solid black;
+	font-family: Georgia, serif;
 
 }
 
@@ -55,8 +54,7 @@ div {
 }
 
  #player-one {
-
-	height: 75px;
+	height: 65px;
 	background-color: red;
 	border-bottom: 1px solid black;
 
@@ -65,7 +63,7 @@ div {
 }
 
 #player-two {
-	height: 75px;
+	height: 65px;
 	background-color: blue;
 	border-bottom: 1px solid black;
 
@@ -76,7 +74,7 @@ div {
 	background-color: grey;
 	border: 1px solid black;
 	width: 75px;
-	display: inline-block;
+	/*display: inline-block;*/
 	float: left;
 	margin-left: 20px;
 	margin-top: 100px;
@@ -102,7 +100,7 @@ div {
 	padding: 1px 2px;
 	color: white;
 	border: 0px;
-	margin-left: 35%;
+	margin-left: 10%;
 	font-size: 15px;
 }
 
@@ -146,8 +144,24 @@ div {
 }
 
 
-#start{
-
-	
+#start{	
+	background-color: coral;
+	padding: 1px 2px;
+	color: white;
+	border: 0px;
+	margin-left: 20%;
+	font-size: 15px;
+	margin-bottom: 10px;
 }
+	
+
+#start:hover{
+	background: darkgrey;
+}
+
+
+
+
+
+
 

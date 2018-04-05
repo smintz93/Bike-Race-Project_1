@@ -160,7 +160,6 @@ const game = {
 
 	menu(){
 
-
 	// I want this to also feature a start gmae button which kicks off the game	as well as timer 
 
 
@@ -203,35 +202,36 @@ const game = {
 
 	// THIS button does nothing 
 
-		// const start = function() {
+		const start = function() {
 
 
-		// 	$("#start").on("click", () => {
+			$("#start").on("click", () => {
 
-		// 		console.log("I am a Click")
+				console.log("I am a Click")
 
-		// 		game.drawCourse();
+				// game.drawCourse();
 
-		// 		game.createObstacles(5);
+				// game.createObstacles(5);
 
-		// 		playerOne.initialize();
+				playerOne.initialize();
 
-		// 		playerTwo.initialize();
+				playerTwo.initialize();
 
-		// 		animate();
+				// animate();
+
+				game.setup();
 
 
-
-
-		
-		// })
 
 		
+		})
 
-		// }
+		
+
+		}
 
 
-		// start();
+		start();
 
 
 	},
@@ -481,6 +481,7 @@ function animate() {
 
 	if(game.determineWinner() == true || game.determineWinner() == true){
 
+
 		game.setup();
 
 	
@@ -502,7 +503,7 @@ function animate() {
 
 
 game.menu();
-game.setup();
+// game.setup();
 
 
 $("body").on("keydown", function (e) {
