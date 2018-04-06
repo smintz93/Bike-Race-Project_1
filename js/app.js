@@ -24,7 +24,6 @@ class Obstacle {
 		ctx.moveTo(this.x, this.y);
 		ctx.lineTo(this.x, this.y + this.length);	
 		ctx.stroke();
-
 	}
 
 	moveObstacles() {
@@ -73,7 +72,6 @@ class Player {
 			this.y = 300;
 		}
 		
-		// ctx.drawImage(bikeImage, 0, 0, 120, 120, this.x -20, this.y -20, 40, 40)
 
 		this.makeBike();
 
@@ -149,10 +147,8 @@ const game = {
 
 		const length = this.finishLine - this.startLine 
 
-		// distance between the individual lines
 		const distance = length / (n + 1)
 
-		// draw n equally spaced lines
 		for(let i = 1; i <= n; i++) {
 
 			const obst = new Obstacle(this.startLine + distance * i, this.startLineY1, this.lineLength, true) 
@@ -166,7 +162,6 @@ const game = {
 		}
 
 	},
-
 
 	menu(){
 
@@ -218,7 +213,7 @@ const game = {
 	},
 
 
-	setup() { console.log("setup")
+	setup() { 
 
 
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -233,11 +228,10 @@ const game = {
 
 		playerTwo.initialize();
 
-		function timer() { console.log("timer started")
+		function timer() { 
 
 			const timer = setInterval(() => {
 				time--
-				console.log(time)
 
 				if(time === 0) {
 					clearInterval(timer)
@@ -264,8 +258,7 @@ const game = {
 
 	},
 
-
-	determineWinner(){ console.log("determineWinner")
+	determineWinner(){ 
 
 		if(playerOne.x >= 655)  {
 			
@@ -305,7 +298,6 @@ const game = {
 
 	},
 
-	// if someone won, tell us who it is
 	gameover() { console.log("gameover")
 
 		const closeBtn = $(".closeBtn")
@@ -380,8 +372,7 @@ function collisionDectection(x,y) {
 
 
 // AnimationFrame is here 
-function animate() {  console.log("animate")
-
+function animate() { 
  
 	if(keys[39] && playerOne.x <= 685) {
 
@@ -447,12 +438,12 @@ function animate() {  console.log("animate")
 
 	}
 
-	// erase entire screen
+
 	ctx.clearRect(0, 0, canvas.width, canvas.height)
-	// redraw lines
+	
 	game.drawCourse();
 
-	// move obstacle objects (automatically calls drawLine() for each one)
+
 	for(let i = 0; i < game.obstacles.length; i++) {
 		game.obstacles[i].moveObstacles();
 	}
@@ -471,7 +462,6 @@ function animate() {  console.log("animate")
 			game.setup();
 		}
 
-		// prints winner (3/5) if there was one
 		game.gameover()
 	
 		// once someone crosses the finish line, we always want to stop the animation
@@ -480,11 +470,10 @@ function animate() {  console.log("animate")
 	}   
 
 
-	// runs the animation
+
 	animationHandle = window.requestAnimationFrame(animate);	
 
-} // animate
-
+} 
 
 game.menu();
 

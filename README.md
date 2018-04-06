@@ -4,15 +4,16 @@
 
 Two Player game
 
-Bike race from one side to the other 
+Bike race from one start line to finish line
 Obstacles in the way 
-Avoid obstacles 
+Player must avoid avoid obstacles or they are stopped 
 First bike to get to the finish line wins 
 First bike to win three races wins the game
 
 Set up 
-Scoreboard with instructions
-Canvas next to it 
+
+Scoreboard with instructions and score 
+
 
 
 
