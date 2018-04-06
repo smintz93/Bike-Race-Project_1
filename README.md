@@ -1,23 +1,31 @@
 # Bike-Race-Project_1
 
- Basic Rules 
+## Basic Rules
 
-Two Player game
+## Two Player Race Game
 
-Bike race from one start line to finish line
-Obstacles in the way 
+## Jquery / Canvas game 
+
+Bike race from start line to finish line
+Obstacles are in the way 
 Player must avoid avoid obstacles or they are stopped 
 First bike to get to the finish line wins 
 First bike to win three races wins the game
+The user can move the start the race after a timer has expired (3,2,1)
+The bikes are controlled by using left, up, right, down arrows and a,w,d,s
 
-Set up 
 
-Scoreboard with instructions and score 
+
+
+Future versions of the game will include increased difficulty as game progress with more obstacles being added. 
+
+
 
 
 
 
 User 
+
 
 Moves bikes across the screen
 Has to avoid obstacles
