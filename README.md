@@ -1,4 +1,4 @@
-# Bike-Race-Project_1
+# Bike Race Project 1
 
 ## Two Player Race Game
 
@@ -15,23 +15,28 @@
 
 
 
-Future versions of the game will include increased difficulty as game progress with more obstacles being added. 
+### Future versions of the game will include:
+
+* Increased difficulty as game progress with more obstacles being added. 
+* Backwards collision detection
 
 
 
 
 
+## User 
 
-User 
-
-Moves bikes across the screen
-Has to avoid obstacles
-The user moves the bikes by using the a,w,d,s keys AND left, up, right, down
-The user can move the start the race after a timer has expired (3,2,1)
-Thw winner is determined by whoever crosses the line first. 
-
+* Moves bikes across the screen
+* Has to avoid obstacles
+* The user moves the bikes by using the a,w,d,s keys AND left, up, right, down
+* The user can move the start the race after a timer has expired (3,2,1)
+* The winner is determined by whoever crosses the line first. 
 
 
+### Challenges for this project included:
+
+* Moving players at separate times 
+* Collision detection for the Bikes
 
 
 
